@@ -42,6 +42,7 @@ while True:
     if flag_alimento_mas_caro == True:
         precio_mas_caro = precio_por_kilo
         tipo_alimento_mas_caro = tipo_ingresado
+        flag_alimento_mas_caro = False
     elif precio_por_kilo > precio_mas_caro:
         precio_mas_caro = precio_por_kilo
         tipo_alimento_mas_caro = tipo_ingresado
@@ -68,9 +69,9 @@ elif tipo_alimento_mas_caro == 'a':
 else:
     tipo_alimento_mas_caro = 'Mezcla'
 
-print ('Precio bruto sin descuento:', precio_bruto,"\n"
+print ('Precio bruto sin descuento: $',precio_bruto,"\n"
         'Tipo de alimento mas caro:', tipo_alimento_mas_caro,"\n"
-        'Promedio de peso por kilo:', promedio_precio_por_kilo)
+        'Promedio de peso por kilo: $',promedio_precio_por_kilo)
 
 # print('precio bruto:', precio_bruto)
 
@@ -85,9 +86,4 @@ if descuento != 0:
     calculo_descuento = (descuento / 100) * precio_bruto
 #   print (calculo_descuento)
     precio_final = precio_bruto - calculo_descuento
-    print('El precio final con descuento es:', precio_final)
-
-
-    
-
-
+    print('El precio final con descuento es: $', precio_final)
