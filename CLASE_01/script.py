@@ -1,4 +1,6 @@
 """
+EJERCICIO 01
+
 La división de higiene está trabajando en un control de stock para productos sanitarios. Debemos realizar la carga de 5 (cinco) productos de prevención de contagio, de cada una debe obtener los siguientes datos:
 
 1. El tipo (validar "barbijo", "jabón" o "alcohol")
