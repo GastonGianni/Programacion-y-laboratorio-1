@@ -84,6 +84,8 @@ elif peso_total >= 300:
 
 if descuento != 0:
     calculo_descuento = (descuento / 100) * precio_bruto
+
 #   print (calculo_descuento)
+
     precio_final = precio_bruto - calculo_descuento
     print('El precio final con descuento es: $', precio_final)
