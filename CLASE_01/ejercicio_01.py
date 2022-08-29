@@ -12,8 +12,6 @@ La división de higiene está trabajando en un control de stock para productos s
 Del más caro de los barbijos, la cantidad de unidades y el fabricante.
 Del ítem con más unidades, el fabricante.
 Cuántas unidades de jabones hay en total.
-
-
 """
 
 barbijo_mas_caro_flag = True
