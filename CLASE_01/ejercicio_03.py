@@ -76,12 +76,12 @@ while True:
     if continuar == 's': continue
     else: break
 
-if contador_heroinas != 0:
+if  contador_heroinas != 0:
     promedio_edad_heroinas = suma_edad_heroinas / contador_heroinas
-if contador_heroes_fuerza != 0:
+if  contador_heroes_fuerza != 0:
     promedio_edad_heroes_fuerza = suma_edad_heroes_fuerza / contador_heroes_fuerza
 
-if sexo_h_mayor_edad == 'f':
+if  sexo_h_mayor_edad == 'f':
     sexo_h_mayor_edad = 'Femenino'
 elif sexo_h_mayor_edad == 'm':
     sexo_h_mayor_edad = 'Masculino'
