@@ -1,4 +1,6 @@
 '''
+EJERCICIO 03
+
 La división de alimentos de industrias Wayne está trabajando en un pequeño software para cargar datos de heroínas y héroes, para para tener un control de las condiciones de heroes existentes, nos solicitan:
 1. Nombre de Heroína/Héroe
 2. EDAD (mayores a 18 años)
@@ -70,8 +72,6 @@ while True:
         suma_edad_heroes_fuerza += edad
         contador_heroes_fuerza += 1
         
-
-
     continuar = input('Desea continuar? s/n: ')
     if continuar == 's': continue
     else: break
@@ -95,3 +95,5 @@ print(
     'El promedio de edad entre Heroinas es:', promedio_edad_heroinas, 'años', '\n'
     'El promedio de edad entre Heroes de fuerza es:', promedio_edad_heroes_fuerza, 'años'
     )  
+
+

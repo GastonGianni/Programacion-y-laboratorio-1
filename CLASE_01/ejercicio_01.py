@@ -72,14 +72,14 @@ for i in range(2):
         cantidad_jabones += cantidad_productos
 
 
-    
-
 print('Unidades del barbijo mas caro :', unidades_barbijo_mas_caro)
 print('Fabricante del barbijo mas caro :', fabricante_barbijo_mas_caro)
-
 print('Fabricante con mayor unidades: ', fabricante_mayor_unidades)
-
 print('Cantidad de unidades de Jabon: ', cantidad_jabones)
+    
+
+
+
 
 
 
