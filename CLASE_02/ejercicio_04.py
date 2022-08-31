@@ -13,10 +13,8 @@ heroes_para_reclutar = [
     "Superman", "Super Girl", "Power Girl"
 ]
 
-
-
 # print(cantidad_heroes)
-        
+
 
 heroes_info = {
     "Super Girl": {
@@ -53,15 +51,62 @@ for heroe in heroes_para_reclutar:
     for info in heroes_info:
         if heroe == info:
             heroes_seleccionados[heroes_para_reclutar[i]] = heroes_info[info] 
-
+            s_heroes = (set(heroes_seleccionados[heroes_para_reclutar[i]]['Habilidades']))
+            # heroes_seleccionados[heroes_para_reclutar[i]]['Habilidades'] = s_heroes
+            print(  "ID:", heroes_seleccionados[heroes_para_reclutar[i]]['ID'], "Codename:", heroes_para_reclutar[i], "\n"
+                    "Identidad:", heroes_seleccionados[heroes_para_reclutar[i]]['Identidad'], "Origen:", heroes_seleccionados[heroes_para_reclutar[i]]['Origen'], "\n"
+                    "Habilidades:", s_heroes, "\n"
+                    "------------------------------- \n"   
+                )
     i += 1
+
+# print(heroes_seleccionados)
+
+# {
+# 'Wonder Woman':{
+#     'ID': 29, 'Origen': 'Amazonia', 'Habilidades': ['Agilidad', 'Fuerza', 'Lazo de la verdad', 'Escudo'], 'Identidad': 'Diana Prince'
+#     }, 
+# 'Shazam':{
+#     'ID': 25, 'Origen': 'Tierra', 'Habilidades': ['Volar', 'Fuerza', 'Velocidad', 'Magia', 'Fuerza', 'Velocidad'], 'Identidad': 'Billy Batson'
+#     }, 
+#  'Super Girl':{
+#     'ID': 1, 'Origen': 'Krypton', 'Habilidades': ['Volar', 'Fuerza', 'Velocidad', 'Volar', 'Fuerza', 'Velocidad'], 'Identidad': 'Kara Zor-El'
+#     }, 
+#  'Power Girl':{
+#     'ID': 14, 'Origen': 'Krypton', 'Habilidades': ['Volar', 'Fuerza', 'Congelar', 'Congelar', 'Congelar'], 'Identidad': 
+# 'Karen Starr'
+# }
+# }
+
+
+
+
+
             
-                
 
 
 
 
-print(heroes_seleccionados)
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
 
 
 
