@@ -56,61 +56,28 @@ for heroe in heroes_para_reclutar:
             print(  "ID:", heroes_seleccionados[heroes_para_reclutar[i]]['ID'], "Codename:", heroes_para_reclutar[i], "\n"
                     "Identidad:", heroes_seleccionados[heroes_para_reclutar[i]]['Identidad'], "Origen:", heroes_seleccionados[heroes_para_reclutar[i]]['Origen'], "\n"
                     "Habilidades:", s_heroes, "\n"
-                    "------------------------------- \n"   
+                    "------------------------------- \n"
                 )
     i += 1
 
 # print(heroes_seleccionados)
 
-# {
-# 'Wonder Woman':{
-#     'ID': 29, 'Origen': 'Amazonia', 'Habilidades': ['Agilidad', 'Fuerza', 'Lazo de la verdad', 'Escudo'], 'Identidad': 'Diana Prince'
-#     }, 
-# 'Shazam':{
-#     'ID': 25, 'Origen': 'Tierra', 'Habilidades': ['Volar', 'Fuerza', 'Velocidad', 'Magia', 'Fuerza', 'Velocidad'], 'Identidad': 'Billy Batson'
-#     }, 
-#  'Super Girl':{
-#     'ID': 1, 'Origen': 'Krypton', 'Habilidades': ['Volar', 'Fuerza', 'Velocidad', 'Volar', 'Fuerza', 'Velocidad'], 'Identidad': 'Kara Zor-El'
-#     }, 
-#  'Power Girl':{
-#     'ID': 14, 'Origen': 'Krypton', 'Habilidades': ['Volar', 'Fuerza', 'Congelar', 'Congelar', 'Congelar'], 'Identidad': 
-# 'Karen Starr'
-# }
-# }
+# ID: 29 Codename: Wonder Woman 
+# Identidad: Diana Prince Origen: Amazonia 
+# Habilidades: {'Escudo', 'Lazo de la verdad', 'Agilidad', 'Fuerza'}
+# -------------------------------
 
+# ID: 25 Codename: Shazam
+# Identidad: Billy Batson Origen: Tierra
+# Habilidades: {'Volar', 'Velocidad', 'Fuerza', 'Magia'}
+# -------------------------------
 
+# ID: 1 Codename: Super Girl
+# Identidad: Kara Zor-El Origen: Krypton
+# Habilidades: {'Volar', 'Velocidad', 'Fuerza'}
+# -------------------------------
 
-
-
-            
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-    
-            
-            
-
+# ID: 14 Codename: Power Girl
+# Identidad: Karen Starr Origen: Krypton
+# Habilidades: {'Congelar', 'Volar', 'Fuerza'}
+# -------------------------------
