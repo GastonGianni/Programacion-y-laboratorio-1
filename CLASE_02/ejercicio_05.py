@@ -63,20 +63,15 @@ for habilidad in habilidades:
 
     habilidades_dict["habilidades_UTN"].append((lista_nombre_y_poder[i]))
 
-    
-    
     i += 1
-
-
+    
 habilidades_dict["habilidades_UTN"].sort(key= lambda x:x[1])
-
+    
 
 for i in range(6):
     mensaje += 'Habilidad {0}: {1} | Poder: {2} \n'.format(i, habilidades_dict["habilidades_UTN"][i][0],habilidades_dict["habilidades_UTN"][i][1])
 
 print(mensaje)
 
+
 # print(habilidades_dict) = {'habilidades_UTN': [('Vuelo', 32), ('Vision-X', 64), ('Super Velocidad', 128), ('Inteligencia', 256), ('Magia', 512), ('Metamorfosis', 1024)]}
-
-
-
