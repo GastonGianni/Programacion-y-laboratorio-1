@@ -218,20 +218,19 @@ def sanitizar_entero(numero_str: str)-> int:
   numero = numero_str
   if numero_str.isnumeric() == True:
     numero = numero_str.strip(" ")
+    numero = int(numero)
+    if numero >= 0:
+      retorno = numero
+    else:
+      retorno = -2 
   elif numero_str.isalpha() == True:
-    retorno = -1 , "No contiene caracteres numericos"
+    retorno = -1
     return retorno
 
-  numero = int(numero)
 
-  if numero >= 0:
-    retorno = numero
-  else:
-    retorno = -2 , "Numero Negativo"
-  
   return retorno
 
-# a = sanitizar_entero("30")
+# a = sanitizar_entero("-240")
 # print(a)
 
 #-------------------#
@@ -247,7 +246,7 @@ def sanitizar_flotante(numero_str: str)-> float:
 
   En el caso de funcionar correctamente retorna el flotante.
   '''
-  retorno = -3, "Error"
+  retorno = -3
   if type(numero_str) == int or type(numero_str) == float:
     return retorno
 
@@ -259,11 +258,11 @@ def sanitizar_flotante(numero_str: str)-> float:
       if numero >= 0:
         retorno = numero
       else:
-        retorno = -2 , "Numero Negativo"
+        retorno = -2
     elif numero.isalpha() == True:
-      retorno = -1 , "No contiene caracteres numericos"
+      retorno = -1
   else:
-    retorno = -3, "Error"
+    retorno = -3
       
 
   return retorno
@@ -273,7 +272,7 @@ def sanitizar_flotante(numero_str: str)-> float:
 
 #-------------------#
 
-def sanitizar_string(valor_str: str, valor_por_defecto = "-"):
+def sanitizar_string(valor_str: str, valor_por_defecto = "-")-> str:
   '''
   Funcion que analiza un string y determina si solo contiene texto.
 
@@ -304,7 +303,7 @@ def sanitizar_string(valor_str: str, valor_por_defecto = "-"):
           string += e + " "
           i += 1
         else:
-          retorno = print("N/A")
+          retorno = "N/A"
           return retorno
       
       retorno = string.lower()
@@ -312,7 +311,7 @@ def sanitizar_string(valor_str: str, valor_por_defecto = "-"):
   else:
     retorno = "N/A"
   
-  print(retorno)
+  return retorno
  
 # sanitizar_string("", "hola/HOLA")
 
@@ -341,27 +340,36 @@ def sanitizar_dato(heroe: dict, clave: str, tipo: str)->bool:
   
   if existe_clave == 0:
     print("La clave especificada no existe en el heroe")
-    return
+    return retorno
 
   if tipo == "string":
-    string_sanitizado = sanitizar_string(heroe[clave])
-    if type(string_sanitizado) == str:
+    sanitizar_string(heroe[clave])
+    if sanitizar_string(heroe[clave]) == 'N/A':
+      retorno = False
+    else:
       retorno = True
   elif tipo == "entero":
-    entero_sanitizado = sanitizar_entero(heroe[clave])
-    if type(entero_sanitizado) == int:
+    sanitizar_entero(heroe[clave])
+    if sanitizar_entero(heroe[clave]) >= 0:
       retorno = True
+    else:
+      retorno = False
   elif tipo == "flotante":
-    flotante_sanitizado = sanitizar_flotante(heroe[clave])
-    if type(flotante_sanitizado) == float:
+    sanitizar_flotante(heroe[clave])
+    if sanitizar_flotante(heroe[clave]) >= 0:
       retorno = True
-
-    
+    else:
+      retorno = False
+      
   else:
     print("Tipo de dato no reconocido")
 
   return retorno
+    
 
+# a = sanitizar_dato(lista_personajes[0], "nombre", "string")
+# print(a)
 
-a = sanitizar_dato(lista_personajes[0], "nombre", "entero")
-print(a)
+#-------------------#
+
+# def stark_normalizar_datos(lista_heroes: list):
