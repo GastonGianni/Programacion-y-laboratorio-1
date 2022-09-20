@@ -373,3 +373,99 @@ def sanitizar_dato(heroe: dict, clave: str, tipo: str)->bool:
 #-------------------#
 
 # def stark_normalizar_datos(lista_heroes: list):
+#   '''
+#   Funcion encargada de sanitizar los datos de una lista de diccionarios con las siguientes claves:
+
+#   "altura", "peso", "color_ojos", "color_pelo", "fuerza" e "inteligencia".
+
+#   Muestra "Datos normalizados" finalizado el proceso o "Lista de heroes vacías" si no hay elementos.
+#   '''
+  
+    
+  
+    
+    
+    
+
+
+#   print("Datos normalizados")
+
+# stark_normalizar_datos(lista_personajes)
+
+#-------------------#
+
+def generar_indice_nombres(lista_heroes: list) -> list:
+
+  retorno = 'El origen de los datos no contiene el formato correcto'
+
+  if len(lista_heroes) > 0:
+    nombre = ""
+    for elemento in lista_heroes:
+      if type(elemento) == dict and "nombre" in elemento:
+        nombre += elemento["nombre"] + " "
+  
+    retorno = re.findall('[a-zA-Z]+', nombre)
+
+  return retorno
+
+# generar_indice_nombres(lista_personajes)
+
+#-------------------#
+
+def stark_imprimir_indice_nombre(lista_heroes: list):
+  lista_nombres = generar_indice_nombres(lista_heroes)
+  separador = "-"
+
+  nombres_separados = separador.join(lista_nombres)
+  print(nombres_separados)
+
+# stark_imprimir_indice_nombre(lista_personajes)
+
+#-------------------#
+
+def convertir_cm_a_mtrs(valor_cm: float)-> float:
+  '''
+  Funcion que transforma a la unidad metro un flotante que representa una medida en centímetros.
+
+  Recibe como parametro el numero de tipo flotante.
+
+  Retorna el numero convertido si funciona o -1 si hubo algun error.
+  '''
+  valor_mtrs = -1
+
+  if type(valor_cm) == float and valor_cm >= 0:
+    valor_mtrs = "{0:.2f}".format(valor_cm / 100)
+    valor_mtrs = float(valor_mtrs)
+    
+
+
+  return valor_mtrs
+
+# print(convertir_cm_a_mtrs(178.28))
+
+#-------------------#
+
+def generar_separador(patron:str,largo:int,imprimir = True):
+  '''
+  '''
+  retorno = 'N/A'
+
+  if len(patron) > 0 and len(patron) < 3 and type(largo) == int and largo > 0 and largo < 236:
+    patron = str(patron)
+    retorno = ""
+    for i in range(largo):
+      retorno += patron
+
+    if imprimir == True:
+      print(retorno)
+  
+  return retorno
+
+# generar_separador("/", 4, False)
+
+#-------------------#
+
+def generar_encabezado(titulo: str):
+  pass
+
+
