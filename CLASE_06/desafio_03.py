@@ -466,6 +466,5 @@ def generar_separador(patron:str,largo:int,imprimir = True):
 #-------------------#
 
 def generar_encabezado(titulo: str):
-  pass
 
 
