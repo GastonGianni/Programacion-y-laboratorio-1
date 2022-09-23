@@ -10,7 +10,7 @@ def importar_json(url: str):
 
 lista_personajes = importar_json(url_archivo)
 
-#--- BLOQUE FUNCIONES ---#
+#PARTE UNO
 
 def imprimir_dato(string: str):
 
@@ -101,8 +101,97 @@ def leer_archivo(archivo_str:str):
     else:
         return importar_json(archivo_str)
 
-leer_archivo(url_archivo)
+# leer_archivo(url_archivo)
 
 #-----------------------#
 
-def guardar_archivo(archivo_str:str)
+def guardar_archivo(nombre_archivo:str, contenido:str):
+    retorno = False
+    archivo_valido = re.search(r'[.]+', nombre_archivo)
+    if archivo_valido == None:
+        print('Error al crear el archivo {}'.format(nombre_archivo))
+    else:
+        with open(nombre_archivo, "w") as archivo:
+            archivo.write(contenido)
+            print("Se creo el archivo: {}".format(nombre_archivo))
+            retorno = True
+
+    return retorno
+
+# print(guardar_archivo("archivo.json", "Archivo desde guardar_archivo"))
+#-----------------------#
+
+def capitalizar_palabras(string: str)-> str:
+    lista_str = re.findall("[a-zA-Z]+", string)
+    string_cap = ""
+    for elemento in lista_str:
+        string_cap += elemento.capitalize()
+    
+    return string_cap
+
+# print(capitalizar_palabras(lista_personajes[16]["nombre"]))
+    
+#-----------------------#
+
+
+
+def obtener_nombre_capitalizado(heroe:dict)-> str:
+    retorno = capitalizar_palabras(heroe["nombre"])
+    return retorno
+
+# print(obtener_nombre_capitalizado(lista_personajes[0]))
+
+#-----------------------#
+
+def obtener_nombre_y_dato(heroe:dict, key:str):
+    nombre = obtener_nombre_capitalizado(heroe)
+    clave = capitalizar_palabras(key)
+    retorno = "Nombre: {} | {}: {}".format(nombre, clave, heroe[key])
+
+    print(retorno)
+
+# obtener_nombre_y_dato(lista_personajes[4], "inteligencia")
+
+#-----------------------# 
+
+#PARTE DOS
+
+def es_genero(heroe:dict,genero:str)-> bool:
+    retorno = False
+    genero = genero.upper()
+    if genero == 'F' or genero == 'M' or genero == 'NB':
+        if heroe["genero"] == genero:
+            retorno = True
+        
+    return retorno
+
+# print(es_genero(lista_personajes[10], "f"))
+
+#-----------------------# 
+
+def stark_guardar_heroe_genero(lista_heroes:list, genero:str):
+    nombre = ""
+    retorno = False
+    genero = genero.capitalize()
+    if genero == 'F' or genero == 'M' or genero == 'NB':
+        for heroe in lista_heroes:
+            if es_genero(heroe,genero) == True:
+                nombre += obtener_nombre_capitalizado(heroe) + ","
+        
+        imprimir_dato(nombre)
+        if genero == 'M':
+            guardar_archivo("heroes_M.csv", nombre)
+        elif genero == 'F':
+            guardar_archivo("heroes_F.csv", nombre)
+        else:
+            guardar_archivo("heroes_NB.csv", nombre)
+        
+        retorno = True
+    
+    return retorno
+
+# print(stark_guardar_heroe_genero(lista_personajes, "f"))
+
+#-----------------------# 
+
+#PARTE TRES
