@@ -1,8 +1,10 @@
 import re
 import json
 
-url_archivo = r"C:\Users\giann\Desktop\utn\Programacion y laboratorio 1\Repositorio GitHub\Programacion-y-laboratorio-1\CLASE_10\data_stark.json"
-
+#URL PC
+#url_archivo = r"C:\Users\giann\Desktop\utn\Programacion y laboratorio 1\Repositorio GitHub\Programacion-y-laboratorio-1\CLASE_10\data_stark.json"
+#URL NB
+url_archivo = r"C:\Users\giann\Desktop\Gasti\Repositorio Git UTN\Programacion-y-laboratorio-1\CLASE_10\data_stark.json"
 
 def importar_json(url: str) -> list:
     """
@@ -16,13 +18,39 @@ def importar_json(url: str) -> list:
 
     return data["heroes"]
 
-
 lista_heroes = importar_json(url_archivo)
-
+print(lista_heroes)
+'''
+[
+    {
+        'nombre': 'Howard the Duck', 
+        'identidad': 'Howard (Last name unrevealed)', 
+        'altura': 79.35, 
+        'peso': 18.45, 
+        'fuerza': 2, 
+        'inteligencia': ''
+    }, 
+    {
+        'nombre': 'Rocket Raccoon', 
+        'identidad': 'Rocket Raccoon', 
+        'altura': 122.77, 
+        'peso': 25.73, 
+        'fuerza': 5, 
+        'inteligencia': 'average'
+    },
+'''
 # print(lista_heroes)
 # print(type(lista_heroes))
 
 # 1- Listar los primeros N héroes. El valor de N será ingresado por el usuario (Validar que no supere max. de lista)
+def validar_entero(string_recibido)->int:
+    if re.search("^[0-9]+$", string_recibido) is None:
+        print("\n///INGRESE UN NUMERO///\n")
+        return False
+    else:
+        return int(string_recibido)
+
+
 def listar_heroes(lista_recibida: list, valor_max:str = "1") -> list:
     """
     Función que recorre una lista e imprime la cantidad de elementos hasta la cantidad maxima ingresada (Valor 1 por defecto).
@@ -33,13 +61,12 @@ def listar_heroes(lista_recibida: list, valor_max:str = "1") -> list:
 
     Si existe un error imprime en consola "Error"
     """
-    if re.search("[0-9]", valor_max) is None:
-        print("\n///INGRESE UN NUMERO///\n")
-    else:
-        valor_max = int(valor_max)
+
+    valor_max = validar_entero(valor_max)
+    if valor_max == False:
+        return
 
     retorno = "Error"
-
     if len(lista_recibida) > 0 and type(lista_recibida) == list and valor_max > 0 and valor_max <= len(lista_recibida):
         copia_lista = lista_recibida[:]
         lista_a_retornar = []
@@ -304,15 +331,16 @@ def exportar_csv(lista_recibida: list):
 #----- MENU -----#
 
 def imprimir_menu():
-    print("1)Listar héroes.\n2)Ordenar y listar por altura.\n3)Ordenar y listar héroes por fuerza.\n4)Calcular promedio de una clave.\n5)Buscar héroes por inteligencia.\n6)Crear CSV.\n7)Salir")
+    print("1)Listar héroes.\n2)Ordenar y listar heroes por su altura.\n3)Ordenar y listar héroes por su fuerza.\n4)Calcular promedio de una clave y filtrar heroe.\n5)Buscar héroes por tipo de inteligencia.\n6)Crear archivo .CSV con la ultima lista seleccionada.\n7)Salir")
  
 def app(lista_recibida:list):
     lista_seleccionada = []
     while True:
         imprimir_menu()
         respuesta = input("\nIngrese respuesta > ")
-        if re.search("[0-9]", respuesta) is None:
-            print("\n///INGRESE UN NUMERO///\n")
+        respuesta = validar_entero(respuesta)
+        if respuesta == False:
+            continue
         else:
             respuesta = int(respuesta)
             if respuesta == 1:
@@ -335,5 +363,7 @@ def app(lista_recibida:list):
                 exportar_csv(lista_seleccionada)
             elif respuesta == 7:
                 break
+            else:
+                print("Seleccione una opcion correcta")
             
-app(lista_heroes)
+# app(lista_heroes)
