@@ -1,9 +1,7 @@
-from operator import index
+lista = [3, 4, 5, 6, 2, 6, 5, 10, 9, 8, 6, 4, 8]
 
 
-lista = [3,4,5,6,2,6,5,10,9,8,6,4,8]
-
-def encontrar_minimo(lista:list):
+def encontrar_minimo(lista: list):
     minimo = lista[0]
     indice = 0
 
@@ -14,9 +12,11 @@ def encontrar_minimo(lista:list):
 
     return indice
 
+
 # encontrar_minimo(lista)
 
-def nahu_sort(lista_desordenada:list) -> list:
+
+def nahu_sort(lista_desordenada: list) -> list:
     copia_lista = lista_desordenada[:]
     lista_ordenada = []
     while len(copia_lista) > 0:
@@ -26,25 +26,24 @@ def nahu_sort(lista_desordenada:list) -> list:
 
     return lista_ordenada
 
+
 # print(nahu_sort(lista))
 
-#--------------------#
+# --------------------#
 
-def sort_list(lista_desordenada:list) -> list:
-    copia_lista = lista_desordenada[:]
-    i = 0
-    aum = 0
-    print(copia_lista)
+# def sort_list(lista_desordenada:list) -> list:
+#     copia_lista = lista_desordenada[:]
+#     i = 0
+#     aum = 0
+#     print(copia_lista)
 
-    for i in range(len(copia_lista)):
-        for elemento in copia_lista:
-            if elemento < copia_lista[i]:
-                aum += 1
-                copia_lista[i + aum] = elemento
-                i = 1
-                
+#     for i in range(len(copia_lista)):
+#         for elemento in copia_lista:
+#             if elemento < copia_lista[i]:
+#                 aum += 1
+#                 copia_lista[i + aum] = elemento
+#                 i = 1
 
-            
 
-    print(copia_lista)
-sort_list(lista)
+#     print(copia_lista)
+# sort_list(lista)

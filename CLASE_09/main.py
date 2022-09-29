@@ -7,9 +7,10 @@ lista = [9,8,10,7,6,4,5,3,2,1]
 '''
 QUICK SORT.
     - Se selecciona un "Pivote" Al azar de la lista.
-    - Separa las mas grandes en una lista y las mas chicas en otra.
+    - Se generan dos listas vacias (izquierda y derecha)
+    - Se appendean los elementos menores al pivote en la lista izquierda y los mayores en la derecha (ordenamiento ascendente)
     - De cada sublista creada se genera un nuevo Pivote y se realiza el mismo procedimiento. (RECURSIVIDAD)
-    - Una vez que cada lista tenga un solo elemento, se acomodan.
+    - Cuando cada sublista tenga su tamaño en 1 elemento
 '''
 
 def qsort(lista_a_ordenar:list)-> list:
