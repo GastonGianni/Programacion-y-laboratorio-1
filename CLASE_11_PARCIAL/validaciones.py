@@ -53,3 +53,31 @@ def validar_json(path_recibido:str)-> bool:
     return retorno
 
 # print(validar_json(".\CLASE_11_PARCIAL\data_stark.json"))
+
+def validar_lista(lista_recibida:list) ->bool:
+    '''
+    Funcion que valida si lo ingresado por parametro es de tipo lista
+
+    Retorna True en caso de serlo o False en caso contrario.
+    '''
+    retorno = False
+    if type(lista_recibida) == list:
+        retorno = True
+
+    return retorno
+
+# lista = []
+# print(validar_lista(lista))
+
+def validar_clave_lista(lista_recibida:list, clave_recibida:str) -> bool:
+    '''
+    Funcion que valida si dentro de una lista de diccionarios se encuentra una clave especifica.
+
+    Recibe como parametro la lista y la clave (str)
+
+    Retorna True si existe, False en caso contrario.
+    '''
+    retorno = False
+    for elemento in lista_recibida:
+        #CONTINUAR ACA!!
+        pass

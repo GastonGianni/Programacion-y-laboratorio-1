@@ -79,7 +79,7 @@ def listar_heroes(lista_recibida:list, valor_max:int):
     
     '''
 
-    if validaciones.validar_entero(valor_max):
+    if validaciones.validar_entero(valor_max) and validaciones.validar_lista(lista_recibida):
         valor_max = int(valor_max)
         if valor_max > len(lista_recibida):
             print("\nError, el valor es mayor que el tamaño de la lista")
@@ -89,9 +89,16 @@ def listar_heroes(lista_recibida:list, valor_max:int):
                 print("\n{}".format(elemento["nombre"]))
             return copia_lista
     else:
-        print("\nError. Ingrese un número")
+        print("\nError")
 
+def sort_list(lista_recibida:list, metodo:str) -> list:
+    '''
+    Funcion que recorre una lista, genera una copia y la ordena de manera ascendente o descendente.
+
+    Recibe como parametro la lista y el metodo ["Asc" o "Desc"]
+
+    Retorna la la copia de la lista ordenada.
+    '''    
     
-
 
 
