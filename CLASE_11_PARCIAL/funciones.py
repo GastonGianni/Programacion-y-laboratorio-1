@@ -91,14 +91,29 @@ def listar_heroes(lista_recibida:list, valor_max:int):
     else:
         print("\nError")
 
-def sort_list(lista_recibida:list, metodo:str) -> list:
+def sort_list(lista_recibida:list, clave:str, metodo:str) -> list:
     '''
-    Funcion que recorre una lista, genera una copia y la ordena de manera ascendente o descendente.
+    Funcion que recorre una lista, genera una copia y ordena el valor de una clave de manera ascendente o descendente.
 
-    Recibe como parametro la lista y el metodo ["Asc" o "Desc"]
+    Recibe como parametro la lista, la clave y el metodo ["Asc" o "Desc"]
 
-    Retorna la la copia de la lista ordenada.
+    Retorna la la copia de la lista ordenada o "Error" si alguno de los datos esta mal ingresado
     '''    
-    
+    retorno = "Error"
+    if validaciones.validar_lista(lista_recibida) and validaciones.validar_string(metodo) and validaciones.validar_string(clave):
+        if len(lista_recibida) <= 1:
+            retorno = lista_recibida
+        else: 
+            copia_lista = lista_recibida[:]
+            lista_izq = []
+            lista_der = []
+            if re.search("^asc$", metodo, re.I) != None:
+                #Continuar aca
+                pass
+                
+                
+                
 
+
+        
 
