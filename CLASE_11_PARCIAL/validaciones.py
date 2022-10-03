@@ -42,14 +42,13 @@ def validar_json(path_recibido:str)-> bool:
 
     Recibe como parametro el PATH (str)
 
-    Retorna True en ese caso o False si existe algun error.
+    Retorna True si el archivo es tipo JSON o False en caso contrario.
     '''
+    retorno = False
     if type(path_recibido) == str and len(path_recibido) > 0:
-        if re.search("\.json",path_recibido, re.I) == None:
-            retorno = False
-        else:
+        if re.search("\.json$",path_recibido, re.I):
             retorno = True
-    
+
     return retorno
 
 # print(validar_json(".\CLASE_11_PARCIAL\data_stark.json"))
@@ -78,6 +77,14 @@ def validar_clave_lista(lista_recibida:list, clave_recibida:str) -> bool:
     Retorna True si existe, False en caso contrario.
     '''
     retorno = False
-    for elemento in lista_recibida:
-        #CONTINUAR ACA!!
-        pass
+    if validar_lista(lista_recibida) and validar_string(clave_recibida):
+        copia_lista = lista_recibida[:]
+        clave_recibida = clave_recibida.lower()
+        for elemento in copia_lista:
+            if clave_recibida in elemento:
+                retorno = True
+                break
+    return retorno
+
+
+        
