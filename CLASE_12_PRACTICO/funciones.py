@@ -70,7 +70,7 @@ def listar_personajes_ordenados_altura(lista_recibida:list):
     copia_lista = lista_recibida[:]
     lista_ordenada = sort_list(copia_lista, "height")
     for elemento in lista_ordenada:
-        print("\nNombre: {} | Altura: {}".format(elemento["name"], elemento["height"]))
+        print("\nNombre: {0} | Altura: {1}".format(elemento["name"], elemento["height"]))
 
 def buscar_primer_genero(lista_recibida:list, genero:str) -> dict:
     '''
@@ -121,10 +121,12 @@ def buscador_personaje(lista_recibida:list, valor_buscado:str):
     '''
     copia_lista = lista_recibida[:]
     mensaje = 'Personaje no encontrado'
-    for elemento in copia_lista:
-        if re.search(valor_buscado, elemento["name"], re.I):
-            mensaje = ("Personaje: {0}".format(elemento))
-    print(mensaje)
+    if type(lista_recibida) == list:
+        mensaje = ""
+        for elemento in copia_lista:
+            if re.search(valor_buscado, elemento["name"], re.I):
+                mensaje += ("\nPersonaje encontrado: {0}".format(elemento["name"]))
+    print(f"{mensaje}\n")
 
 def exportar_csv(lista_recibida:list):
     '''
@@ -138,5 +140,5 @@ def exportar_csv(lista_recibida:list):
             for elemento in copia_lista:
                 elemento = str(elemento)
                 elemento = re.sub("{|}|'", "", elemento)
-                archivo.writelines("{}, \n".format(elemento))
+                archivo.writelines("{0}, \n".format(elemento))
 
