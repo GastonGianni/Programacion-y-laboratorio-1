@@ -1,3 +1,4 @@
-Gianni Gaston
-Ejercicios
+Gianni Gaston.
+PROGRAMACION Y LABORATORIO 1 
+
 
