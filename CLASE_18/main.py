@@ -21,7 +21,7 @@ class Personaje():
 
 personaje_1 = Personaje("Pepe")
 personaje_2 = Personaje("Juana")
-personaje_1.nuevo_nombre = "Pablo"
+personaje_1.nuevo_nombre = "Juan"
 print(personaje_1.nombre)
 
 

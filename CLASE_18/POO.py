@@ -4,7 +4,7 @@ class Persona:
         self.__edad = edad
         self.__nombre = nombre
         self.__peso = 15
-        self.__lista = ["hola","chau","tarde","noche"]
+        self.__lista = ["hola","adios","tarde","noche"]
 
     def __str__(self) -> str:
         return 'Tengo {} años'.format(self.__edad)
