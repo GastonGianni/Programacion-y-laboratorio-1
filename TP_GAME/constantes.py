@@ -1,0 +1,12 @@
+FPS = 60
+
+# GROUND_LEVEL_1 = 600
+
+DIRECTION_R = 1
+DIRECTION_L = -1
+
+DEBUG = False
+
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
