@@ -1,17 +1,17 @@
 from constantes import *
 
 level_map = [
-    '                              ',
-    '     B        E          B   X',
+    '     P                        ',
+    '     B   Z    C        Z B   X',
     'B    X  B  B  B  B  B  B X  XX',
     'XB   XXXXXXXXXXXXXXXXXXXXX    ',
     'XX                            ',
-    '                    N         ',
+    '                    Z         ',
     '   B    B  B  B  B B B B      ',
-    'P  XXX  X  X  X  XXXXXXX      ',
-    '                           N B',
-    '                          BXXX',
-    '  B  B  B  B  B  B    BXXXXXXX',
+    '   XXX  X  X  X  XXXXXXX      ',
+    '                             B',
+    '                        Z BXXX',
+    '  B  B  B  B  B  B  Z BXXXXXXX',
     'XXXXXXTTXTTXTTXTTXXXXXXXXXXXXX',
 ]
 

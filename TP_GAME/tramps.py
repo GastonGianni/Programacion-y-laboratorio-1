@@ -12,4 +12,5 @@ class Tramp(pygame.sprite.Sprite):
         pygame.draw.rect(screen, (255,255,255), self.collition_rect)
 
     def update(self,speed_camera_x):
+        self.collition_rect = pygame.Rect(self.rect.x, self.rect.y + (self.rect.h / 2),self.rect.width,40)
         self.rect.x += speed_camera_x

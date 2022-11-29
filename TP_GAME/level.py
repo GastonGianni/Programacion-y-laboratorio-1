@@ -7,6 +7,7 @@ from enemy import Enemy
 from rewards import Reward
 from tramps import Tramp
 from gui_button import Button
+from bullet import Bullet
 
 class Level:
     def __init__(self,level_data,surface) -> None:
@@ -22,9 +23,9 @@ class Level:
         self.tiles = pygame.sprite.Group()
         self.rewards = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
-        self.enemy = pygame.sprite.GroupSingle()
+        self.enemies = pygame.sprite.Group()
         self.tramps = pygame.sprite.Group()
-        self.button_restart = Button(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50,pygame.image.load("Resources\GUI\png\Button.png").convert())
+        
         
         for index_row, row in enumerate(layout):
             for index_column,cell in enumerate(row):
@@ -40,11 +41,14 @@ class Level:
                     sprite_rewards = Reward((x,y),50,path="Resources\coins\Free-Game-Coins-Sprite\PNG\Gold\Gold_{}.png")
                     self.rewards.add(sprite_rewards)
                 if cell == 'P':
-                    sprite_player = Player(pos=(x,y),speed = 8, gravity = 0.8,jump_speed= -16,jump_limit= 60, frames_animations=45)
+                    sprite_player = Player(pos=(x,y),speed = 8, gravity = 0.8,jump_speed= -16,jump_limit= 60, frames_animations=45,cooldown_shoot=12)
                     self.player.add(sprite_player)
-                if cell == 'E':
-                    sprite_enemy = Enemy(pos=((x,y)),speed = 3,gravity= 0.8,frames_animations= 40)
-                    self.enemy.add(sprite_enemy)
+                if cell == 'C':
+                    sprite_enemy_one = Enemy(pos=((x,y)),speed = 7,gravity= 0.8,frames_animations= 60,size_w_stay=80,size_h_stay=100,size_w_run=75,size_h_run=100,size_w_dead=90,size_h_dead=100,path_stay=r"Resources\enemy_1\png\Idle ({0}).png",path_run=r"Resources\enemy_1\png\Run ({0}).png",path_dead=r"Resources\enemy_1\png\Dead ({0}).png",scale=1,quantity_stay=9,quantity_run=7,quantity_dead= 9,health=100)
+                    self.enemies.add(sprite_enemy_one)
+                if cell == 'Z':
+                    sprite_enemy_two = Enemy(pos=((x,y)),speed = 3,gravity= 0.8,frames_animations= 60,size_w_stay=80,size_h_stay=100,size_w_run=75,size_h_run=100,size_w_dead=90,size_h_dead=110,path_stay=r"Resources\zombiefiles\png\male\Idle ({0}).png",path_run=r"Resources\zombiefiles\png\male\Walk ({0}).png",path_dead=r"Resources\zombiefiles\png\male\Dead ({0}).png",scale=1,quantity_stay=14,quantity_run=9,quantity_dead= 11,health=50)
+                    self.enemies.add(sprite_enemy_two)
         
 
     def move_screen_x(self):
@@ -97,26 +101,26 @@ class Level:
                         player.direction.y = 0
 
     def collisions_x_enemy(self,delta_ms):
-        enemy = self.enemy.sprite
-        enemy.movement_x(delta_ms)
-        for sprite_tile in self.tiles.sprites(): 
-            if sprite_tile.rect.colliderect(enemy.rect):
-                if enemy.direction.x < 0 or enemy.direction_looking == DIRECTION_L:
-                    enemy.rect.left = sprite_tile.rect.right 
-                elif enemy.direction.x > 0 or enemy.direction_looking == DIRECTION_R: 
-                    enemy.rect.right = sprite_tile.rect.left
+        for enemy in self.enemies.sprites():
+            enemy.movement_x(delta_ms)
+            for sprite_tile in self.tiles.sprites(): 
+                if sprite_tile.rect.colliderect(enemy.rect):
+                    if enemy.direction.x < 0 or enemy.direction_looking == DIRECTION_L:
+                        enemy.rect.left = sprite_tile.rect.right 
+                    elif enemy.direction.x > 0 or enemy.direction_looking == DIRECTION_R: 
+                        enemy.rect.right = sprite_tile.rect.left
                     
     def collisions_y_enemy(self):
-        enemy = self.enemy.sprite
-        enemy.movement_y()
-        for sprite_tile in self.tiles.sprites():  
-            if sprite_tile.rect.colliderect(enemy.rect): 
-                if enemy.direction.y > 0: 
-                    enemy.rect.bottom = sprite_tile.rect.top
-                    enemy.direction.y = 0
-                elif enemy.direction.y < 0:
-                    enemy.rect.top = sprite_tile.rect.bottom  
-                    enemy.direction.y = 0             
+        for enemy in self.enemies.sprites():
+            enemy.movement_y()
+            for sprite_tile in self.tiles.sprites():  
+                if sprite_tile.rect.colliderect(enemy.rect): 
+                    if enemy.direction.y > 0: 
+                        enemy.rect.bottom = sprite_tile.rect.top
+                        enemy.direction.y = 0
+                    elif enemy.direction.y < 0:
+                        enemy.rect.top = sprite_tile.rect.bottom  
+                        enemy.direction.y = 0             
     
     def collisions_player_coins(self):
         player = self.player.sprite
@@ -127,18 +131,57 @@ class Level:
 
     def collisions_player_enemy(self):
         player = self.player.sprite
-        if pygame.sprite.spritecollide(player,self.enemy,False):
-            self.game_over = -1
+        for enemy in self.enemies.sprites():
+            if enemy.rect.colliderect(player.rect):
+                player.health -= 5
+                print("Contacto con enemigo")
+
+    def collisions_player_tramps(self):
+        player = self.player.sprite
         for tramp_rect in self.tramps.sprites():
             if tramp_rect.collition_rect.colliderect(player.rect):
-                self.game_over = -1
+                player.rect.bottom -= 30
+                player.health -= 4
+                print("Contacto con trampas")
 
-        
+    def draw_lives(self):
+        player = self.player.sprite
+        pygame.draw.rect(self.surface,(255,0,0), (SCREEN_WIDTH - 450, 40, 400, 15))
+        if player.health >= 0:
+            pygame.draw.rect(self.surface,(0,255,0), (SCREEN_WIDTH - 450, 40, player.health, 15))
+
+        for enemy in self.enemies.sprites():
+            pygame.draw.rect(self.surface,(255,0,0), (enemy.rect.x + 15,enemy.rect.y, enemy.health, 10))
+            if enemy.health >= 0:
+                pygame.draw.rect(self.surface,(0,255,0), (enemy.rect.x + 15,enemy.rect.y, enemy.health, 10))
+
+    def collision_bullets_enemy(self):
+        player = self.player.sprite
+        for kunai in player.kunais_list:
+            for enemy in self.enemies.sprites():
+                if kunai.rect.colliderect(enemy.hitbox):
+                    player.kunais_list.remove(kunai)
+                    enemy.health -= 5
+                    print("Le dio al enemigo")
+
+    def player_death(self):
+        player = self.player.sprite
+
+        if player.health <= 0:
+            self.game_over = -1
+
+    def enemy_death(self):
+        for enemy in self.enemies.sprites():
+            if enemy.health <= 0:
+                enemy.dead()
+                if enemy.frame == enemy.quantity_dead - 1:
+                    enemy.kill()
+
     def run(self,delta_ms):
-        
-            
         # BACKGROUND
         self.surface.blit(self.background,self.background.get_rect())
+        self.draw_lives()
+        
 
         # PLATAFORMAS
         self.tiles.update(self.map_move_x)
@@ -154,10 +197,11 @@ class Level:
         self.rewards.draw(self.surface)
 
         # ENEMIGO
-        self.enemy.update(delta_ms,self.map_move_x)
+        self.enemies.update(delta_ms,self.map_move_x)
         self.collisions_y_enemy()
         self.collisions_x_enemy(delta_ms)
-        self.enemy.draw(self.surface)
+        self.enemy_death()
+        self.enemies.draw(self.surface)
 
         # JUGADOR
         self.player.update(delta_ms,self.game_over)
@@ -165,11 +209,22 @@ class Level:
         self.collisions_y_player(self.game_over)
         self.collisions_player_coins()
         self.collisions_player_enemy()
+        self.collisions_player_tramps()
+        self.collision_bullets_enemy()
+        self.player_death()
         self.player.draw(self.surface)
 
+        # KUNAIS
+        for kunai in self.player.sprite.kunais_list:
+            kunai.draw(self.surface)
+
+        
         if DEBUG:
             player = self.player.sprite
-            pygame.draw.rect(self.surface, (255,255,255), player.rect)
+            pygame.draw.rect(self.surface, (255,0,0), player.hitbox, 1)
+            for enemy in self.enemies.sprites():
+                pygame.draw.rect(self.surface,(255,255,0),enemy.hitbox,1)
 
             for trampa in self.tramps.sprites():
                 trampa.show_debug(self.surface)
+

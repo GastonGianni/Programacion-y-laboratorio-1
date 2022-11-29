@@ -3,12 +3,15 @@ from constantes import *
 from auxiliar import Auxiliar
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self,pos,speed,gravity,frames_animations) -> None:
+    def __init__(self,pos,speed,gravity,frames_animations,size_w_stay,size_h_stay,size_w_run,size_h_run,size_w_dead,size_h_dead,path_stay,path_run,path_dead,scale,quantity_stay,quantity_run,quantity_dead,health) -> None:
         super().__init__()
-        self.stay_r = Auxiliar.getSurfaceFromSeparateFiles("Resources\enemy_1\png\Idle ({0}).png",9,False,1,1,75,100,1)
-        self.stay_l = Auxiliar.getSurfaceFromSeparateFiles("Resources\enemy_1\png\Idle ({0}).png",9,True,1,1,75,100,1)
-        self.run_r = Auxiliar.getSurfaceFromSeparateFiles("Resources\enemy_1\png\Run ({0}).png",7,False,1,1,80,100,1)
-        self.run_l = Auxiliar.getSurfaceFromSeparateFiles("Resources\enemy_1\png\Run ({0}).png",7,True,1,1,80,100,1)
+        self.stay_r = Auxiliar.getSurfaceFromSeparateFiles(path_stay,quantity_stay,False,1,scale,size_w_stay,size_h_stay,1)
+        self.stay_l = Auxiliar.getSurfaceFromSeparateFiles(path_stay,quantity_stay,True,1,scale,size_w_stay,size_h_stay,1)
+        self.run_r = Auxiliar.getSurfaceFromSeparateFiles(path_run,quantity_run,False,1,scale,size_w_run,size_h_run,1)
+        self.run_l = Auxiliar.getSurfaceFromSeparateFiles(path_run,quantity_run,True,1,scale,size_w_run,size_h_run,1)
+        self.dead_r = Auxiliar.getSurfaceFromSeparateFiles(path_dead,quantity_dead,False,1,scale,size_w_dead,size_h_dead,1)
+        self.dead_l = Auxiliar.getSurfaceFromSeparateFiles(path_dead,quantity_dead,True,1,scale,size_w_dead,size_h_dead,1)
+        self.quantity_dead = quantity_dead
         self.animation = self.stay_r
         self.frame = 0
         self.image = self.animation[self.frame]
@@ -20,6 +23,8 @@ class Enemy(pygame.sprite.Sprite):
         self.time_animations = 0
         self.time_movements = 0
         self.frames_animations = frames_animations
+        self.hitbox = (self.rect.x + 12,self.rect.y + 12,45,60)
+        self.health = health
 
     def stay(self):
         self.direction.x = 0
@@ -42,15 +47,21 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x += self.direction.x
         if self.time_movements >= 500 and self.time_movements <= 1500:
             self.run(DIRECTION_L)
-        elif self.time_movements > 1500 and self.time_movements <= 4500:
+        elif self.time_movements > 1500 and self.time_movements <= 2500:
             self.stay()
-        elif self.time_movements > 4500 and self.time_movements <= 5500:
+        elif self.time_movements > 2500 and self.time_movements <= 3500:
             self.run(DIRECTION_R)
-        elif self.time_movements > 5500 and self.time_movements <= 8500:
+        elif self.time_movements > 3500 and self.time_movements <= 5500:
             self.stay()
-        elif self.time_movements > 8500:
+        elif self.time_movements > 5500:
             self.time_movements = 0
 
+    def dead(self):
+        if self.health <= 0:
+            if self.direction_looking == DIRECTION_R:
+                self.animation = self.dead_r
+            elif self.direction_looking == DIRECTION_L:
+                self.animation = self.dead_l
 
     def movement_y(self):
         self.direction.y += self.gravity
@@ -66,11 +77,12 @@ class Enemy(pygame.sprite.Sprite):
                 self.frame = 0
             
             self.image = self.animation[self.frame]
-                
+            
 
     def update(self,delta_ms,speed_camera_x):
         self.rect.x += speed_camera_x
         self.animations(delta_ms)
+        self.hitbox = (self.rect.x + 12,self.rect.y + 12,45,60)
         
         # self.movement()
 
